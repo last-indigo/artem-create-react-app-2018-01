@@ -8,6 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      headerVisible: true,
       userName: "Artem",
       skills: ['Front-end', 'Software', 'Angular', 'React']
     }
@@ -16,13 +17,35 @@ class App extends Component {
   render() {
     const userName = this.state.userName;
 
+    let headerVisibleHintHTMLFromIfStatement;
+    if (this.state.headerVisible) {
+      headerVisibleHintHTMLFromIfStatement = (
+        <p>HINT: You see me when this.state.headerVisible === true</p>
+      );
+    }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome, my name is: {userName}</h1>
-        </header>
-        
+        {headerVisibleHintHTMLFromIfStatement}
+
+        <div>
+          <button
+            onClick={this.onToggleHeaderBtnClick.bind(this)}>
+            Toggle header
+          </button>
+        </div>
+
+
+        {this.state.headerVisible &&
+          <header
+            onClick={this.onHeaderClick.bind(this)}
+            className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome, my name is: {userName}</h1>
+            <p>HINT: click the header or the button above to toggle header visibility :)</p>
+          </header>
+        }
+
         My skills are:
         <Skills skills={this.state.skills}/>
 
@@ -32,6 +55,19 @@ class App extends Component {
       </div>
     );
   }
+
+  onToggleHeaderBtnClick() {
+    this.toggleHeader();
+  }
+  
+  onHeaderClick() {
+    this.toggleHeader();
+  }
+
+  toggleHeader() {
+    this.setState({headerVisible: !this.state.headerVisible});
+  }
+
 }
 
 export default App;
