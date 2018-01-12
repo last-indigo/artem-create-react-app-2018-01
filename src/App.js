@@ -47,13 +47,35 @@ class App extends Component {
         }
 
         My skills are:
-        <Skills skills={this.state.skills}/>
+        <Skills
+          skills={this.state.skills}
+          onSkillAdd={this.onSkillAdd.bind(this)}/>
+        
+        <hr/>
+        Reusing the Skills component
+        <hr/>
+
+        <Skills
+          skills={['some', 'other', 'skills list', 'withour onSkillAdd callback']}>
+          <div>
+            I am a child element!  
+          </div>
+        </Skills>
 
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
     );
+  }
+
+  onSkillAdd() {
+    const randomSkill = Date.now();
+    this.addSkill(randomSkill);
+  }
+
+  addSkill(newSkill) {
+    this.setState({skills: [...this.state.skills, newSkill]});
   }
 
   onToggleHeaderBtnClick() {
