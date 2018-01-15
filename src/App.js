@@ -7,6 +7,9 @@ import './App.css';
 // TODO: find out where this code belongs
 import './bank-account-redux/bank-account';
 
+// TODO: complete logger component, to replace console.log calls
+// import { LoggerComponent } from './utils-artem/logger-artem';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +71,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        {/* <LoggerComponent /> */}
       </div>
     );
   }
