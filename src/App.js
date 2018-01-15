@@ -4,6 +4,9 @@ import logo from './logo.svg';
 import Skills from './skills/Skills';
 import './App.css';
 
+// TODO: find out where this code belongs
+import './bank-account-redux/bank-account';
+
 class App extends Component {
   constructor(props) {
     super(props);
