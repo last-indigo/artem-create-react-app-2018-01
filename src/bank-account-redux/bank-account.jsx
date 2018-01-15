@@ -1,10 +1,8 @@
 import { createStore } from 'redux'
 
-import bankAccountReducer from './bank-account.reducer'
+import rootReducer from './bank-account.reducer'
 import { actionCreators } from './bank-account.actions';
 
-// import { log } from '../utils-artem/logger-artem'
-const log = console.log;
 
 const preloadedState = {
     currentBalanceUSD: 1992
@@ -15,15 +13,26 @@ const preloadedState = {
 //     return () =>{};
 // };
 
-const myFirstStore = createStore(bankAccountReducer, preloadedState, /* enhancerFn */);
+const myFirstStore = createStore(rootReducer, preloadedState, /* enhancerFn */);
+// import { log } from '../utils-artem/logger-artem'
+// const log = console.log;
+let countCalled = 0;
+const log = (...args) => {
+    console.log('log is called times:', ++countCalled);
+    const logAction = actionCreators.LOG_ADD_ENTRY(...args);
+    myFirstStore.dispatch(logAction);
+};
+
 log(`myFirstStore.getState(): initial state is`, myFirstStore.getState())
 
 /**
  * listener: () => void
  */
 const myActionDispatchListener = () => {
-    log('Hello from myActionDispatchListener!');
-    log('Current state is', myFirstStore.getState());
+    // TODO: think how to avoid recursive calls due to myStore.subscribe() -> triggers dispatch
+    // log('Hello from myActionDispatchListener!');
+    // log('Current state is', myFirstStore.getState());
+    console.log('subscribe: newState is', myFirstStore.getState());
 };
 function getRandomDeposit() {
     const multiplicator = 1000;
