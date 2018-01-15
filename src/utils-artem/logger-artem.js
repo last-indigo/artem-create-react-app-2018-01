@@ -1,5 +1,4 @@
 import React from 'react';
-import newUniqueId from './uuid-generator'
 
 /**
  * WARNING!
@@ -8,19 +7,19 @@ import newUniqueId from './uuid-generator'
  */
 let _activity = [];
 
-export function log(...messages) {
-    let totalMessage = '';
-    for (let msg of messages) {
-        totalMessage += msg.toString()
-    }
-    _activity = [
-        {
-            message: totalMessage,
-            id: newUniqueId()
-        },
-        ..._activity
-    ];
-}
+// export function log(...messages) {
+//     let totalMessage = '';
+//     for (let msg of messages) {
+//         totalMessage += msg.toString()
+//     }
+//     _activity = [
+//         {
+//             message: totalMessage,
+//             id: newUniqueId()
+//         },
+//         ..._activity
+//     ];
+// }
 
 export function getRecentLogs(depth) {
     if (depth) {

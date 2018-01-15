@@ -1,5 +1,6 @@
 const actionsEnum = {
     MY_BANK_ACCOUNT_ACTION: 'MY_BANK_ACCOUNT_ACTION',
+    LOG_ADD_ENTRY: 'LOG_ADD_ENTRY',
 };
 
 export default actionsEnum;
@@ -13,4 +14,10 @@ export const actionCreators = {
             payload
         }   
     },
+    LOG_ADD_ENTRY: (...args) => (
+        {
+            type: actionsEnum.LOG_ADD_ENTRY,
+            TODODODDODODODOD_ARGS: args
+        }
+    )
 }
