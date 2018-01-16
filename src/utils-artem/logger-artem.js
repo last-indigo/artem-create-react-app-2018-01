@@ -1,41 +1,19 @@
-import React from 'react';
+import { myFirstStore } from '../App.store';
+import { appUtilActionCreators } from '../utils-artem/logger-artem.actions'
 
 /**
- * WARNING!
- * This component still not working good yet.
- * Rewise and change later
+ * log()
+ * DO NOT CALL it inside store.subscribe! Recursion!
+ * @param {*} args 
  */
-let _activity = [];
+export function logAsStoreDispatch(...args) {
+    myFirstStore.dispatch( appUtilActionCreators.addEntryToAppLog(...args) );
+    console.log(myFirstStore.getState())
+    logAsStoreDispatch._counter++;
+};
 
-// export function log(...messages) {
-//     let totalMessage = '';
-//     for (let msg of messages) {
-//         totalMessage += msg.toString()
-//     }
-//     _activity = [
-//         {
-//             message: totalMessage,
-//             id: newUniqueId()
-//         },
-//         ..._activity
-//     ];
-// }
-
-export function getRecentLogs(depth) {
-    if (depth) {
-        return _activity.slice(0, depth)
-    }
-    return [..._activity];
-}
-
-export class LoggerComponent extends React.Component {
-    render() {
-        return (
-            <ul>
-                {getRecentLogs().map(
-                    (entry) => <li key={entry.id}>{entry.message}</li>
-                )}
-            </ul>
-        )
-    }
-}
+/**
+ * _counter
+ * internal property for assertions (in dev mode)
+ */
+logAsStoreDispatch._counter = 0;

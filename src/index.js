@@ -4,5 +4,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { myFirstStore } from './App.store';
+
+function renderApp() {
+    ReactDOM.render(<App />, document.getElementById('root'));
+}
+
+myFirstStore.subscribe(renderApp);
+renderApp();
+
+
 registerServiceWorker();
