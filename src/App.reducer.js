@@ -21,7 +21,7 @@ export default function newRootReducerObjectCompositionDanAbramov(state = {}, ac
 // export function rootReducer(state, action) {
 //     // TODO: how to split responsibilities into several reducers?
 //     const actionTypesToReactionsMappings = {
-//         [bankAccountActionsEnum.MY_BANK_ACCOUNT_ACTION]: bankAccountReducer,
+//         [bankAccountActionsEnum.MONEY_DEPOSIT_REQUESTED]: bankAccountReducer,
 //         [appUtilActionsEnum.ADD_ENTRY_TO_APP_LOG]: loggerReducer,
 //     }
 

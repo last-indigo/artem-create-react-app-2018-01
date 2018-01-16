@@ -10,7 +10,7 @@ import { bankAccountActionsEnum } from './bank-account.actions'
 export default function bankAccountReducer(state = 0, action) {
     /* GOOD: */
     switch (action.type) {
-        case bankAccountActionsEnum.MY_BANK_ACCOUNT_ACTION: {
+        case bankAccountActionsEnum.MONEY_DEPOSIT_REQUESTED: {
             return state + action.payload.depositAmountUSD
         }
         default: {

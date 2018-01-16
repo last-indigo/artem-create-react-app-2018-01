@@ -1,14 +1,19 @@
 export const bankAccountActionsEnum = {
-    MY_BANK_ACCOUNT_ACTION: 'MY_BANK_ACCOUNT_ACTION',
+    MONEY_DEPOSIT_REQUESTED: 'MONEY_DEPOSIT_REQUESTED',
 };
 
 export const bankAccountActionCreators = {
-    MY_BANK_ACCOUNT_ACTION: (payload) => {
+    depositAmountInUSD: (payload) => {
         return {
             // Error: Actions may not have an undefined "type" property. Have you misspelled a constant?
-            type: bankAccountActionsEnum.MY_BANK_ACCOUNT_ACTION,
+            type: bankAccountActionsEnum.MONEY_DEPOSIT_REQUESTED,
             
             payload
         }   
     },
+}
+
+export function getRandomDeposit() {
+    const multiplicator = 1000;
+    return Math.round( Math.random() * multiplicator );
 }

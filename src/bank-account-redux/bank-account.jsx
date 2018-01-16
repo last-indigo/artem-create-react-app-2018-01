@@ -1,6 +1,6 @@
 // TODO: this file should be reorganized by responsibility!
 import { myFirstStore, preloadedState } from '../App.store';
-import { bankAccountActionCreators } from './bank-account.actions';
+import { bankAccountActionCreators, getRandomDeposit } from './bank-account.actions';
 import { logAsStoreDispatch as log } from '../utils-artem/logger-artem'
 
 // const enhancerFn = (next) => {
@@ -25,17 +25,13 @@ const onMyStoreChanged = () => {
     // log('Current state is', myFirstStore.getState());
     console.log('subscribe: newState is', myFirstStore.getState());
 };
-function getRandomDeposit() {
-    const multiplicator = 1000;
-    return Math.round( Math.random() * multiplicator );
-}
 const unsubMyStoreChangedListener =
     myFirstStore.subscribe(onMyStoreChanged);
 
 const payloadForMyBankAccountAction = {
     depositAmountUSD: getRandomDeposit()
 };
-const myAction = bankAccountActionCreators.MY_BANK_ACCOUNT_ACTION(payloadForMyBankAccountAction);
+const myAction = bankAccountActionCreators.depositAmountInUSD(payloadForMyBankAccountAction);
 
 
 log('Will fire action: myFirstStore.dispatch(myAction)', myAction);
@@ -55,7 +51,7 @@ setTimeout(() => {
     const delayedActionPayload = {
         depositAmountUSD: getRandomDeposit()
     };
-    const delayedAction = bankAccountActionCreators.MY_BANK_ACCOUNT_ACTION(delayedActionPayload);
+    const delayedAction = bankAccountActionCreators.depositAmountInUSD(delayedActionPayload);
     
     log('Will fire action: myFirstStore.dispatch(myAction)', delayedActionPayload);
     myFirstStore.dispatch(delayedAction);

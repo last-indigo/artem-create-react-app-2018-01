@@ -9,6 +9,10 @@ import './bank-account-redux/bank-account';
 
 import { myFirstStore } from './App.store';
 import { LoggerComponent } from './utils-artem/logger-artem.component';
+import { BankAccountComponent } from './bank-account-redux/BankAccount.component'
+import { bankAccountActionCreators, getRandomDeposit } from './bank-account-redux/bank-account.actions'
+
+import { logAsStoreDispatch as log } from './utils-artem/logger-artem'
 
 class App extends Component {
   constructor(props) {
@@ -72,6 +76,11 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
+        <BankAccountComponent 
+          state={myFirstStore.getState().currentBalanceUSD}
+          onDepositMoney={this.onDepositMoney.bind(this)}
+          onWithdrawMoney={this.onWithdrawMoney.bind(this)}/>
+
         <LoggerComponent loggerHistory={myFirstStore.getState().loggerHistory}/>
       </div>
     );
@@ -97,6 +106,34 @@ class App extends Component {
   toggleHeader() {
     this.setState({headerVisible: !this.state.headerVisible});
   }
+
+  /**
+   * Had to create this handler so that event and args are not passed to business logic
+   * 
+   * @param {*} e 
+   */
+  onDepositMoney(e) {
+    this.depositMoney();
+    log('Action fired (depositMoney)');
+  }
+
+  onWithdrawMoney() {
+    const options = {negative: true};
+    this.depositMoney(void 0, options);
+    log('Action fired (depositMoney) with options', options);
+  }
+  
+  depositMoney(value = 0, options = {}) {
+    let amount = value || getRandomDeposit();
+    amount = options.negative ? -amount : amount;
+
+    const payloadForMyBankAccountAction = {
+      depositAmountUSD: amount
+    };
+    const myAction = bankAccountActionCreators.depositAmountInUSD(payloadForMyBankAccountAction);
+    myFirstStore.dispatch(myAction);
+  }
+
 
 }
 
