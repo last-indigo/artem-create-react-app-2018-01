@@ -7,8 +7,8 @@ import './App.css';
 // TODO: find out where this code belongs
 import './bank-account-redux/bank-account';
 
-// TODO: complete logger component, to replace console.log calls
-// import { LoggerComponent } from './utils-artem/logger-artem';
+import { myFirstStore } from './App.store';
+import { LoggerComponent } from './utils-artem/logger-artem.component';
 
 class App extends Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
-        {/* <LoggerComponent /> */}
+        <LoggerComponent loggerHistory={myFirstStore.getState().loggerHistory}/>
       </div>
     );
   }

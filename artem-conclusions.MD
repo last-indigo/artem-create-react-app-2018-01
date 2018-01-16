@@ -38,5 +38,32 @@ unsubFn will NOT prevent actions to be processed.
 
 ### TODO: should we reuse action instances, or always create a new one with action creators/manually?
 
+DO NOT dispatch in subscribe listeners (this way - you could cause recursion).
+See `myActionDispatchListener` for example
 
+# Remember to ALWAYS return STATE for unknown action types!
 
+reducer composition (https://egghead.io/lessons/react-redux-reducer-composition-with-objects)
+
+The onMyStoreChanged (`store.subscribe( onMyStoreChanged )`) function WILL NOT be called,
+if someone calls UNSUBSCRIBE returned function!
+
+### TODO: in time travel, how do we move to PREV state AND persist it to various APIs on server?
+
+### TODO: how to correctly re-render app on changes in store?
+Use react-redux? (https://github.com/reactjs/react-redux)
+Use root render method?
+
+It's better to keep state serializable - i.e. a VALID JSON OBJECT!
+(To be able to store in LocalStorage)
+
+*NOTE on REACT:* 
+not very clear from component definition, which PROPS are available.
+
+NOTE ON VSCODE:
+- cannot move file
+- cannot copy relative path with line number
+- different key bindings (it's possible to change them, though)
+- no git tree
+- no 'reveal in source panel' target icon
+- poor 'Git: resolve conflicts' editor (cannot apply diffs line by line)
