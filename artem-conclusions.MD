@@ -57,8 +57,19 @@ Use root render method?
 It's better to keep state serializable - i.e. a VALID JSON OBJECT!
 (To be able to store in LocalStorage)
 
+We can pass all of the props in the state by writing `<MyComp {...store.getState()} />`
+Which will also automatically pick the proper name for the prop.
+
+Passing a lot of prop-callbacks from smart -> to dumb (leaf) components is a real problem,
+but it can be easily solved with intermediate container components. 
+(08:15, https://egghead.io/lessons/react-redux-extracting-presentational-components-addtodo-footer-filterlink)
+Will see in the next lessons.
+
+
 *NOTE on REACT:* 
-not very clear from component definition, which PROPS are available.
+not very clear from component API definition, which PROPS are available.
+-> though, you can mimic the API by using destructuring of `this.props`
+e.g.: `let { prop1, prop2 } = this.props` (see 07:10 in https://egghead.io/lessons/react-redux-react-todo-list-example-filtering-todos)
 
 NOTE ON VSCODE:
 - cannot move file
