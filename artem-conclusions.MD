@@ -65,6 +65,64 @@ but it can be easily solved with intermediate container components.
 (08:15, https://egghead.io/lessons/react-redux-extracting-presentational-components-addtodo-footer-filterlink)
 Will see in the next lessons.
 
+if props did not change, but we know there are changes, use this:
+
+```
+    class MyComponent extend Component {
+        componentDidMount() {
+            store.subscribe(() => {
+                this.forceUpdate();     // the trick is this! NOTE: it's not .render() though!
+            })
+        }
+    }
+```
+
+Composition of components according to "decorator pattern":
+```
+<FilterLink prop1={val1}/>
+    -> <Link prop_internal={this.props.prop1}>
+```
+
+NOTE on STORE reference:
+it should NOT be a local variable
+* large apps - split into multiple files
+* testing - provide mock
+* server-side rendering: each client has its own store and its state.
+
+Advanced React approach: Context.
+class Provider extends Component {
+    getChildContext() {
+        return {
+            store: this.props.store
+        }
+    }
+}
+Context is provided for any children and grand-children.
+We just need to define additional properties 
+on every context-receiving component,
+otherwise it will not be passed down.
+
+Provider.childContextTypes = {
+    store: React.PropTypes.object
+}
+
+VisibleTodoList.contextTypes = {
+    store: React.PropTypes.object
+}
+
+context in functional component is stored not on THIS, but as 2nd argument
+
+Benefit of the context is that we don't need 
+to pass `store` as a prop to each and every component.
+
+3rd party react-redux has this Provider component written for you.
+
+{ connect } method from ReactRedux allows to create a container component
+and pass stateToProps and dispatchToProps objects, that will connect to store
+and become available as props on the presentational component
+
+`.setState( arg )` -> arg can be a function! `(prevState, prevProps) => {...}`
+
 
 *NOTE on REACT:* 
 not very clear from component API definition, which PROPS are available.
